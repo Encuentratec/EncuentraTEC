@@ -1,89 +1,104 @@
 import React from "react";
-import { View, Linking } from "react-native";
 import { MainStackParamList } from "../types/navigation";
 import { StackScreenProps } from "@react-navigation/stack";
 import { supabase } from "../initSupabase";
+import { NativeBaseProvider, Heading, Container, Avatar, HamburgerIcon, ScrollView, HStack } from "native-base"
+import  SearchBar from "../components/utils/SearchBar";
+import  FriendsList from "../components/utils/FriendsList";
+
 import {
-  Layout,
-  Button,
-  Text,
-  TopNav,
-  Section,
-  SectionContent,
-  useTheme,
-  themeColor,
+  useTheme
 } from "react-native-rapi-ui";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function ({
   navigation,
 }: StackScreenProps<MainStackParamList, "MainTabs">) {
   const { isDarkmode, setTheme } = useTheme();
   return (
-    <Layout>
-      <TopNav
-        middleContent="Home"
-        rightContent={
-          <Ionicons
-            name={isDarkmode ? "sunny" : "moon"}
-            size={20}
-            color={isDarkmode ? themeColor.white100 : themeColor.dark}
-          />
-        }
-        rightAction={() => {
-          if (isDarkmode) {
-            setTheme("light");
-          } else {
-            setTheme("dark");
-          }
-        }}
-      />
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+    <NativeBaseProvider
+    >
+      <ScrollView 
+        paddingX={4}
+        paddingTop={12}
       >
-        <Section style={{ marginTop: 20 }}>
-          <SectionContent>
-            <Text fontWeight="bold" style={{ textAlign: "center" }}>
-              These UI components provided by Rapi UI
-            </Text>
-            <Button
-              style={{ marginTop: 10 }}
-              text="Rapi UI Documentation"
-              status="info"
-              onPress={() => Linking.openURL("https://rapi-ui.kikiding.space/")}
-            />
-            <Button
-              text="Go to second screen"
-              onPress={() => {
-                navigation.navigate("SecondScreen");
+        {/* Navbar */}
+        <Container
+          flexDirection={"row"}
+          alignItems={"center"}
+          alignContent={"space-between"}
+        >
+          <Heading
+            alignSelf={{
+              base: "flex-start",
+              md: "flex-start",
+            }}
+          >
+            Tus Amigos
+          </Heading>
+          <Avatar
+            marginLeft={24}
+            source={{
+              uri: "https://pbs.twimg.com/profile_images/1188747996843761665/8CiUdKZW_400x400.jpg",
+            }}
+          >
+            SS
+          </Avatar>
+          <HamburgerIcon 
+          marginLeft={4}
+          />
+        </Container>
+        {/* ScrollView */}
+        <ScrollView>
+          
+        </ScrollView>
+        {/* SearchBar */}
+        <SearchBar></SearchBar>
+        {/* Favorites Section */}
+        <Container paddingBottom={8}>
+          <Heading
+            alignSelf={{
+              base: "flex-start",
+              md: "flex-start",
+            }}
+            marginBottom={4}
+            size={"lg"}
+          >
+            Favoritos
+          </Heading>
+          <HStack space={2}>
+            <Avatar
+              source={{
+                uri: "https://pbs.twimg.com/profile_images/1188747996843761665/8CiUdKZW_400x400.jpg",
               }}
-              style={{
-                marginTop: 10,
+            >
+              SS
+            </Avatar>
+            <Avatar
+              source={{
+                uri: "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg",
               }}
-            />
-            <Button
-              status="danger"
-              text="Logout"
-              onPress={async () => {
-                const { error } = await supabase.auth.signOut();
-                if (!error) {
-                  alert("Signed out!");
-                }
-                if (error) {
-                  alert(error.message);
-                }
+            >
+              GG
+            </Avatar>
+            <Avatar
+              source={{
+                uri: "https://pbs.twimg.com/profile_images/1352844693151731713/HKO7cnlW_400x400.jpg",
               }}
-              style={{
-                marginTop: 10,
+            >
+              RS
+            </Avatar>
+            <Avatar
+              source={{
+                uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg",
               }}
-            />
-          </SectionContent>
-        </Section>
-      </View>
-    </Layout>
+            >
+              AK
+            </Avatar>
+          </HStack>
+        </Container> 
+        {/* Friends List */}
+        <FriendsList></FriendsList>
+      </ScrollView>
+    </NativeBaseProvider>
   );
 }
