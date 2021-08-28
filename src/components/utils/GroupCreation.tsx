@@ -7,7 +7,7 @@ const GroupCreationModal = () => {
 
     return (
     <Modal isOpen={showModal} size={"full"} onClose={() => setShowModal(false)}>
-        <Modal.Content {...styles["bottom"]}>
+        <Modal.Content height="90%" {...styles["bottom"]}>
           <Modal.CloseButton />
           <Modal.Header>Nuevo grupo</Modal.Header>
           <Modal.Body>
