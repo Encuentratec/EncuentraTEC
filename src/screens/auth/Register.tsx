@@ -47,6 +47,8 @@ export default function ({
             family_name: familyName,
             given_name: givenName,
             role: 'student',
+            location_type: 'custom',
+            custom_location: '',
         });
         if (error) {
             setLoading(false);

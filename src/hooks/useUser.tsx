@@ -25,6 +25,7 @@ const useUser = ({ uid }: { uid?: string }) => {
 
     useEffect(() => {
         if (!uid) {
+            setLoading(false);
             setData(userData as User);
         } else {
             try {
@@ -37,8 +38,16 @@ const useUser = ({ uid }: { uid?: string }) => {
                         if (ret.error) setError(ret.error);
                         else setData(ret.data);
                         setLoading(false);
+                    })
+                    //@ts-ignore
+                    .catch((ret) => {
+                        setError(ret.error);
+                        setLoading(false);
+                        console.error(error);
                     });
-            } catch(error) {
+            } catch (error) {
+                setError(error);
+                setLoading(false);
                 console.log(error);
             }
         }

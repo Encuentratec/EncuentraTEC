@@ -4,6 +4,7 @@ import { Session, User } from '@supabase/supabase-js';
 import { User as AppUser } from '../types/supabaseMapped';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/slices/user';
+import { getUserData } from '../handlers/user';
 type ContextProps = {
     user: null | User;
     session: Session | null;
@@ -30,13 +31,9 @@ const AuthProvider = (props: Props) => {
         } else {
             setIsSignedIn(false);
         }
-        if (user) {
+        if (session?.user) {
             try {
-                const res = await supabase
-                    .from<AppUser>('user')
-                    .select('*')
-                    .eq('auth_uid', session?.user?.id)
-                    .single();
+                const res = await getUserData(session.user.id);
                 const { data, error } = res;
                 dispatch(
                     setUserData({
