@@ -634,6 +634,7 @@ export interface paths {
           start_date?: parameters["rowFilter.recurrence.start_date"];
           end_date?: parameters["rowFilter.recurrence.end_date"];
           frequency?: parameters["rowFilter.recurrence.frequency"];
+          weekdays?: parameters["rowFilter.recurrence.weekdays"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -690,6 +691,7 @@ export interface paths {
           start_date?: parameters["rowFilter.recurrence.start_date"];
           end_date?: parameters["rowFilter.recurrence.end_date"];
           frequency?: parameters["rowFilter.recurrence.frequency"];
+          weekdays?: parameters["rowFilter.recurrence.weekdays"];
         };
         header: {
           /** Preference */
@@ -710,6 +712,7 @@ export interface paths {
           start_date?: parameters["rowFilter.recurrence.start_date"];
           end_date?: parameters["rowFilter.recurrence.end_date"];
           frequency?: parameters["rowFilter.recurrence.frequency"];
+          weekdays?: parameters["rowFilter.recurrence.weekdays"];
         };
         body: {
           /** recurrence */
@@ -1243,6 +1246,7 @@ export interface definitions {
     start_date: string;
     end_date?: string;
     frequency: "daily" | "weekly" | "monthly" | "yearly";
+    weekdays?: string;
   };
   user: {
     given_name: string;
@@ -1388,6 +1392,7 @@ export interface parameters {
   "rowFilter.recurrence.start_date": string;
   "rowFilter.recurrence.end_date": string;
   "rowFilter.recurrence.frequency": string;
+  "rowFilter.recurrence.weekdays": string;
   /** user */
   "body.user": definitions["user"];
   "rowFilter.user.given_name": string;

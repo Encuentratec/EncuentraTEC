@@ -44,20 +44,6 @@ const AuthProvider = (props: Props) => {
             } catch (err) {
                 console.log(err);
             }
-
-            // console.log('LOGGED DATA', data);
-            // if (error || !data) {
-            //     setUser(null);
-            //     setSession(null);
-            //     setIsSignedIn(false);
-            // } else {
-            //     dispatch(
-            //         setUserData({
-            //             state: 'logged in',
-            //             user: data,
-            //         })
-            //     );
-            // }
         } else {
             setUserData({
                 state: 'logged out',

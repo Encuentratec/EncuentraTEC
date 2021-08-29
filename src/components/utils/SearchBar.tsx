@@ -14,6 +14,8 @@ function SearchBar(props: { data: any, setData: React.Dispatch<React.SetStateAct
     return name.match(regex);
   }
 
+  console.log(props.data);
+
   return (
     <VStack paddingTop={4}>
       <Input
@@ -21,11 +23,11 @@ function SearchBar(props: { data: any, setData: React.Dispatch<React.SetStateAct
         value={searchTerm}
         onChangeText={(value) => {
           setSearchTerm(value);
-          props.setData(props.data.filter((friend: { title: string; }) => {
-            const friends_name_first_letters = friend.title.substring(0, 3).toLowerCase();
+          props.setData(props.data.filter((friend: any) => {
+            const friends_name_first_letters = friend["user_a"].given_name.substring(0, 3).toLowerCase();
             const lower_case_val = value.toLowerCase();
 
-            return value == "Search" ? true : (friend.title.toLowerCase().includes(lower_case_val) || checkName(friends_name_first_letters, lower_case_val));
+            return value == "Search" ? true : (friend["user_a"].given_name.toLowerCase().includes(lower_case_val) || checkName(friends_name_first_letters, lower_case_val));
           }));
         }}
         variant="filled"
