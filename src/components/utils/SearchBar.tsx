@@ -22,9 +22,10 @@ function SearchBar(props: { data: any, setData: React.Dispatch<React.SetStateAct
         onChangeText={(value) => {
           setSearchTerm(value);
           props.setData(props.data.filter((friend: { title: string; }) => {
-            const friends_name_first_letters = friend.title.substring(0, 3).toLowerCase()
+            const friends_name_first_letters = friend.title.substring(0, 3).toLowerCase();
+            const lower_case_val = value.toLowerCase();
 
-            return value == "Search" ? true : (friend.title.toLowerCase().includes(value) || checkName(friends_name_first_letters, value));
+            return value == "Search" ? true : (friend.title.toLowerCase().includes(lower_case_val) || checkName(friends_name_first_letters, lower_case_val));
           }));
         }}
         variant="filled"
