@@ -1,11 +1,8 @@
 import { Avatar, Button, HamburgerIcon, Heading, HStack, Popover, Pressable, Switch, VStack, Text, Select } from "native-base"
 import React from "react"
 import { useState } from "react";
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 import Configuration from "./Configuration";
 
-const Drawer = createDrawerNavigator();
 
 const NavBar = (props: {
     title: string;

@@ -122,7 +122,7 @@ export default function ({
                         </Text>
                         <Text>Nombre</Text>
                         <TextInput
-                            editable={loading}
+                            editable={!loading}
                             containerStyle={{ marginTop: 15 }}
                             placeholder="Nombre"
                             value={givenName}
@@ -133,7 +133,7 @@ export default function ({
                         />
                         <Text>Apellido</Text>
                         <TextInput
-                            editable={loading}
+                            editable={!loading}
                             containerStyle={{ marginTop: 15 }}
                             placeholder="Nombre"
                             value={familyName}
@@ -144,7 +144,7 @@ export default function ({
                         />
                         <Text>Correo</Text>
                         <TextInput
-                            editable={loading}
+                            editable={!loading}
                             containerStyle={{ marginTop: 15 }}
                             placeholder="Correo"
                             value={email}
@@ -156,7 +156,7 @@ export default function ({
                         />
                         <Text style={{ marginTop: 15 }}>Contraseña</Text>
                         <TextInput
-                            editable={loading}
+                            editable={!loading}
                             containerStyle={{ marginTop: 15 }}
                             placeholder="Contraseña"
                             value={password}
