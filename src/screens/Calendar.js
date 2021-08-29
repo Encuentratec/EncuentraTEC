@@ -1,6 +1,6 @@
-import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { AntDesign } from "@expo/vector-icons"
+import {View} from 'react-native';
 import {
   NativeBaseProvider,
   VStack,
@@ -8,11 +8,11 @@ import {
   Icon,
   Modal,
 } from "native-base"
-import SearchBar from "../components/utils/SearchBar";
-import { MainStackParamList } from '../types/navigation';
 import NavBar from "../components/utils/NavBar";
 import {useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import RNSchedule from 'rnschedule';
+
 const data = [
   {
     title: 'Lunch Appointment',
@@ -27,7 +27,26 @@ const data = [
 export default function ({
     navigation,
   }) {
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [date, setDate] = useState(new Date());
+    const [mode,setMode] = useState('date');
+    const onChange = (event, selectedDate) => {
+      if(mode === 'date'){
+        const currentDate = selectedDate || date;
+        setDate(currentDate);
+        setMode('time');
+      } else if (mode === 'time'){
+        const currentTime = selectedDate || date;
+        const currentDate = date;
+        date.setHours(currentTime.getHours());
+        date.setMinutes(currentTime.getMinutes());
+        setDate(currentDate);
+        setShowModal(false);
+        setMode('date');
+        console.log(date)
+      }
+    };
+  
     return (
       <NativeBaseProvider>
       <VStack paddingX={4} paddingTop={12} flex={1} justifyContent="flex-start">
@@ -47,15 +66,16 @@ export default function ({
           icon={<Icon color="white" as={<AntDesign name="plus" />} size="sm" />}
           onPress={()=>setShowModal(true)}
         />
-        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <Modal.Content maxWidth="400px">
-          <Modal.CloseButton />
-          <Modal.Header>Modal Title</Modal.Header>
-          <Modal.Body>
-            Que onda que pex
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
+        <View>
+          {showModal && (<DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />)}
+      </View>
       </NativeBaseProvider>
   );
 }
