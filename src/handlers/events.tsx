@@ -53,6 +53,15 @@ export const createEvent = async ({
 
     if (error) throw error;
 
+    await supabase
+        .from<definitions['user_event']>('user_event')
+        .insert({
+            attending: true,
+            event_id: data?.id,
+            user_id,
+        })
+        .single();
+
     return data;
 };
 
