@@ -1,5 +1,5 @@
 import React from "react"
-import {VStack, Text, HStack, Avatar, List, Center } from "native-base"
+import {VStack, Text, HStack, Avatar, List, View } from "native-base"
 import { VirtualizedList } from "react-native"
 
   const data = [
@@ -46,8 +46,8 @@ import { VirtualizedList } from "react-native"
   ]
 
 const ListItem = ({ title, avatar_uri }: { title: string; avatar_uri: string }) => (
-    <List.Item >
-      <VStack {...styles["list_item"]} width="100%">
+    <List.Item borderBottomColor="#e7e5e4" borderBottomWidth="1px" >
+      <VStack justifyContent="center" width="100%" >
           <HStack>
             <Avatar size="md" source={{ uri: avatar_uri }} marginRight={4}>        
               <Avatar.Badge bg={"red.600"} />
@@ -71,6 +71,15 @@ const getItemCount = (_data: any) => _data.length;
 
 export const FriendsListComponent = () => {
   return (
+    <>
+    <View
+      style={{
+        borderBottomColor: "#e7e5e4",
+        borderBottomWidth: 1,
+        width: "120%",
+        marginLeft: -20,
+      }}
+    ></View>
     <VirtualizedList
       data={data}
       initialNumToRender={data.length}
@@ -79,17 +88,8 @@ export const FriendsListComponent = () => {
       getItem={getItem}
       keyExtractor={(item) => item.id}
     />
+    </>
   )
 }
 
-const styles = {
-  list_item: {
-    paddingTop: 3,
-    borderTopWidth: "1px",
-    borderTopColor: "gray.200",
-    justifyContent: "center",
-    // borderBottomWidth: "1px",
-    // borderBottomColor: "gray.200",
-  }
-}
 export default FriendsListComponent;
