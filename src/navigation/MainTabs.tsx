@@ -8,6 +8,7 @@ import TabBarText from "../components/utils/TabBarText";
 import Home from "../screens/Home";
 import About from "../screens/About";
 import Profile from "../screens/Profile";
+import Calendar from "../screens/Calendar";
 
 const Tabs = createBottomTabNavigator();
 const MainTabs = () => {
@@ -27,10 +28,22 @@ const MainTabs = () => {
         component={Home}
         options={{
           tabBarLabel: ({ focused }) => (
-            <TabBarText focused={focused} title="Home" />
+            <TabBarText focused={focused} title="Inicio" />
           ),
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} icon={"md-home"} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Calendar"
+        component={Calendar}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <TabBarText focused={focused} title="Eventos" />
+          ),
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} icon={"calendar-outline"} />
           ),
         }}
       />
