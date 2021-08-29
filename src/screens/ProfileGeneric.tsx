@@ -1,15 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
-import { MainStackParamList } from '../types/navigation';
-import { StackScreenProps } from '@react-navigation/stack';
-import { Layout, Text } from 'react-native-rapi-ui';
 import { Avatar, Center, Divider, Heading, VStack } from 'native-base';
 import useUser from '../hooks/useUser';
 
 export default function ({
-    navigation,
-}: StackScreenProps<MainStackParamList, 'MainTabs'>) {
-    const { data } = useUser({});
+    uid,
+}: {uid: string;}) {
+    const { data } = useUser({uid});
 
 	return (
         <VStack paddingX={4} paddingTop={12} flex={1}>
@@ -25,3 +21,4 @@ export default function ({
         </VStack>
     );
 }
+˝
