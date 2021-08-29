@@ -9,13 +9,10 @@ import Loading from '../screens/utils/Loading';
 import { Container } from 'native-base';
 
 export default () => {
-	const auth = useContext(AuthContext);
-	const user = auth.user;
-	return (
-		<NavigationContainer>
-			{user == null && <Loading />}
-			{user == false && <Auth />}
-			{user == true && <Main />}
-		</NavigationContainer>
-	);
+    const { session, user } = useContext(AuthContext);
+    return (
+        <NavigationContainer>
+            {session ? user == null ? <Loading /> : <Main /> : <Auth />}
+        </NavigationContainer>
+    );
 };
