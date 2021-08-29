@@ -42,10 +42,10 @@ export default function ({
         uid: string;
     }) {
         const { data, error } = await supabase.from<User>('user').insert({
+            auth_uid: uid,
             email: email,
             family_name: familyName,
             given_name: givenName,
-            id: uid,
             role: 'student',
         });
         if (error) {

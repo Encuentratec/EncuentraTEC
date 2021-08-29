@@ -31,13 +31,24 @@ const AuthProvider = (props: Props) => {
             setIsSignedIn(false);
         }
         if (user) {
-            // TODO: Fetch user data
-            // const { data, error } = await supabase
-            //     .from<AppUser>('user')
-            //     .select('*')
-            //     .eq('id', session?.user?.id)
-            //     .single();
+            try {
+                const res = await supabase
+                    .from<AppUser>('user')
+                    .select('*')
+                    .eq('auth_uid', session?.user?.id)
+                    .single();
+                const { data, error } = res;
+                dispatch(
+                    setUserData({
+                        state: 'logged in',
+                        user: data,
+                    })
+                );
+            } catch (err) {
+                console.log(err);
+            }
 
+            // console.log('LOGGED DATA', data);
             // if (error || !data) {
             //     setUser(null);
             //     setSession(null);

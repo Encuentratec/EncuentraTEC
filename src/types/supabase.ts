@@ -316,6 +316,8 @@ export interface paths {
           /** Location id that relates the field to the locations table */
           location_id?: parameters["rowFilter.user.location_id"];
           id?: parameters["rowFilter.user.id"];
+          /** uid corresponding to auth table */
+          auth_uid?: parameters["rowFilter.user.auth_uid"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -378,6 +380,8 @@ export interface paths {
           /** Location id that relates the field to the locations table */
           location_id?: parameters["rowFilter.user.location_id"];
           id?: parameters["rowFilter.user.id"];
+          /** uid corresponding to auth table */
+          auth_uid?: parameters["rowFilter.user.auth_uid"];
         };
         header: {
           /** Preference */
@@ -404,6 +408,8 @@ export interface paths {
           /** Location id that relates the field to the locations table */
           location_id?: parameters["rowFilter.user.location_id"];
           id?: parameters["rowFilter.user.id"];
+          /** uid corresponding to auth table */
+          auth_uid?: parameters["rowFilter.user.auth_uid"];
         };
         body: {
           /** user */
@@ -667,6 +673,8 @@ export interface definitions {
      * This is a Primary Key.<pk/>
      */
     id: string;
+    /** uid corresponding to auth table */
+    auth_uid: string;
   };
   user_connection: {
     /**
@@ -746,6 +754,8 @@ export interface parameters {
   /** Location id that relates the field to the locations table */
   "rowFilter.user.location_id": string;
   "rowFilter.user.id": string;
+  /** uid corresponding to auth table */
+  "rowFilter.user.auth_uid": string;
   /** user_connection */
   "body.user_connection": definitions["user_connection"];
   "rowFilter.user_connection.user_id_a": string;
