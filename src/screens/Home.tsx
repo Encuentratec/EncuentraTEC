@@ -24,13 +24,13 @@ export default function ({ navigation }: StackScreenProps<MainStackParamList, "M
         <VStack paddingX={4} paddingTop={12} flex={1} justifyContent="flex-start" >
             <NavBar title="Tus Amigos" avatar_uri="https://pbs.twimg.com/profile_images/1188747996843761700/8CiUdKZW_400x400.jpg" />
             <SearchBar />
-            <VStack paddingTop={4}>
+            <VStack paddingTop={2}>
                 <Heading
                     alignSelf={{
                         base: "flex-start",
                         md: "flex-start",
                     }}
-                    marginBottom={4}
+                    marginBottom={2}
                     size={"lg"}
                 >
                     Favoritos
