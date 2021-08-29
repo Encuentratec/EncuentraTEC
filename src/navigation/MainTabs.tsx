@@ -28,7 +28,7 @@ const MainTabs = () => {
         component={Home}
         options={{
           tabBarLabel: ({ focused }) => (
-            <TabBarText focused={focused} title="Home" />
+            <TabBarText focused={focused} title="Inicio" />
           ),
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} icon={"md-home"} />
@@ -40,7 +40,7 @@ const MainTabs = () => {
         component={Calendar}
         options={{
           tabBarLabel: ({ focused }) => (
-            <TabBarText focused={focused} title="Calendar" />
+            <TabBarText focused={focused} title="Eventos" />
           ),
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} icon={"calendar-outline"} />
