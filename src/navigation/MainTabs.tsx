@@ -23,7 +23,6 @@ const MainTabs = () => {
         },
       }}
     >
-      {/* these icons using Ionicons */}
       <Tabs.Screen
         name="Home"
         component={Home}
