@@ -6,20 +6,18 @@ const NavBar = (props: {
     avatar_uri?: string;
 }) => {
     return (
-        <HStack 
+        <HStack
             alignItems={"center"}
-            alignContent={"space-between"}
+            justifyContent={"space-between"}
         >
-            <Heading alignSelf={
-                {
-                    base: "flex-start",
-                    md: "flex-start"
-                }
-            }>
+            <Heading>
                 {props.title}
             </Heading>
             {props.avatar_uri &&
-                <>
+                <HStack
+                    alignItems={"center"}
+                    alignContent={"flex-end"}
+                >
                     <Avatar marginLeft={23}
                         source={
                             { uri: props.avatar_uri }
@@ -27,7 +25,7 @@ const NavBar = (props: {
                         SS
                     </Avatar>
                     <HamburgerIcon marginLeft={4} />
-                </>
+                </HStack>
             }
         </HStack>
     )

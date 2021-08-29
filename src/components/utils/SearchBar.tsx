@@ -4,7 +4,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
-function SearchBar(){
+function SearchBar() {
   return (
     <VStack paddingTop={4}>
       <Input
@@ -17,9 +17,10 @@ function SearchBar(){
         px={2}
         _web={{
           _focus: { borderColor: 'muted.300', style: { boxShadow: 'none' } },
-          }}
+        }}
+        paddingY={2}
         InputLeftElement={<Icon size='sm' ml={2} color="gray.400" as={<Ionicons name="ios-search" />} />
-      }
+        }
       />
     </VStack>
   )
