@@ -1,6 +1,5 @@
 import { Button, HStack, Switch, VStack, Text, Actionsheet, useDisclose } from "native-base"
 import React, { useState } from "react"
-import { useDispatch } from "react-redux";
 import useUser from "../../hooks/useUser";
 import { supabase } from "../../initSupabase";
 import { User } from '../../types/supabaseMapped';

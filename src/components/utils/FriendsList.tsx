@@ -1,5 +1,5 @@
 import React from "react"
-import { VStack, Text, HStack, Avatar, List, View, Icon, AddIcon, Button, IconButton } from "native-base"
+import { VStack, Text, HStack, Avatar, List, View, AddIcon, IconButton } from "native-base"
 import { VirtualizedList } from "react-native"
 
 
