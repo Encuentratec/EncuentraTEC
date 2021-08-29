@@ -1,10 +1,13 @@
-import { Avatar, Container, HamburgerIcon, Heading, HStack } from "native-base"
+import { Avatar, HamburgerIcon, Heading, HStack, Pressable } from "native-base"
 import React from "react"
+import { useState } from "react";
 
 const NavBar = (props: {
     title: string;
     avatar_uri?: string;
 }) => {
+    const [userStatus, setUserStatus] = useState("disponible"); 
+ 
     return (
         <HStack
             alignItems={"center"}
@@ -18,12 +21,15 @@ const NavBar = (props: {
                     alignItems={"center"}
                     alignContent={"flex-end"}
                 >
+                <Pressable onPress={() => {userStatus == "disponible" ? setUserStatus("ocupado") : setUserStatus("disponible")}}> 
                     <Avatar marginLeft={23}
                         source={
                             { uri: props.avatar_uri }
                         }>
                         SS
+                        <Avatar.Badge bg={userStatus == "disponible" ? "green.600" : "red.600" } />
                     </Avatar>
+                </Pressable>
                     <HamburgerIcon marginLeft={4} />
                 </HStack>
             }

@@ -22,7 +22,7 @@ export default function ({ navigation }: StackScreenProps<MainStackParamList, "M
 
     return (
         <VStack paddingX={4} paddingTop={12} flex={1} justifyContent="flex-start" >
-            <NavBar title="Tus Amigos" avatar_uri="https://pbs.twimg.com/profile_images/1188747996843761700/8CiUdKZW_400x400.jpg" />
+            <NavBar title="Tus Amigos" avatar_uri="https://i.imgur.com/pzESYyI.jpeg" />
             <SearchBar />
             <VStack paddingTop={2}>
                 <Heading
