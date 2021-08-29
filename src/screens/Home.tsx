@@ -2,12 +2,8 @@ import React from "react";
 import { MainStackParamList } from "../types/navigation";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
-    NativeBaseProvider,
     Heading,
-    Container,
     Avatar,
-    ScrollView,
-    Text,
     HStack,
     VStack,
 } from "native-base"
@@ -17,12 +13,13 @@ import FriendsList from "../components/utils/FriendsList";
 import { useTheme } from "react-native-rapi-ui";
 import NavBar from "../components/utils/NavBar";
 
+
 export default function ({ navigation }: StackScreenProps<MainStackParamList, "MainTabs">) {
     const { isDarkmode, setTheme } = useTheme();
 
     return (
         <VStack paddingX={4} paddingTop={12} flex={1} justifyContent="flex-start" >
-            <NavBar title="Tus Amigos" avatar_uri="https://pbs.twimg.com/profile_images/1188747996843761700/8CiUdKZW_400x400.jpg" />
+            <NavBar title="Tus Amigos" avatar_uri="https://i.imgur.com/pzESYyI.jpeg" />
             <SearchBar />
             <VStack paddingTop={2}>
                 <Heading
