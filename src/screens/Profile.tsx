@@ -8,12 +8,15 @@ export default function ({
     navigation,
 }: StackScreenProps<MainStackParamList, 'MainTabs'>) {
     const { data } = useUser({});
+    console.log(data);
 
-	return (
+    return (
         <VStack paddingX={4} paddingTop={12} flex={1}>
             <Center marginY={4}>
-                <Avatar source={{ uri: data?.picture_url }} >
-                    {`${data?.given_name.charAt(0)}${data?.family_name.charAt(0)}`}
+                <Avatar source={{ uri: data?.picture_url }}>
+                    {`${data?.given_name.charAt(0)}${data?.family_name.charAt(
+                        0
+                    )}`}
                 </Avatar>
                 <Heading size="lg">
                     {data?.given_name} {data?.family_name}
