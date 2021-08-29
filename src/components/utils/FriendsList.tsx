@@ -1,19 +1,20 @@
 import React from "react"
-import {FlatList, VStack, NativeBaseProvider, Container, Text, HStack, Avatar } from "native-base"
-export const Example = () => {
+import {VStack, Text, HStack, Avatar, List, Center } from "native-base"
+import { VirtualizedList } from "react-native"
+
   const data = [
     {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+      id: "6",
       title: "First Contact",
       uri: "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg"
     },
     {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+      id: "5",
       title: "Second Contact",
       uri: "https://pbs.twimg.com/profile_images/1352844693151731713/HKO7cnlW_400x400.jpg"
     },
     {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      id: "4",
       title: "Third Contact",
       uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg"
     },
@@ -32,33 +33,63 @@ export const Example = () => {
       title: "Third Contact",
       uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg"
     },
+    {
+      id: "11",
+      title: "Third Contact",
+      uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg"
+    },
+    {
+      id: "10",
+      title: "Third Contact",
+      uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg"
+    },
   ]
-  return (
-    <FlatList
-      width={"100%"}
-      data={data}
-      renderItem={({ item }) => (
-        <Container paddingY={4} borderTopWidth={"1px"} borderTopColor="black" width={"100%"}>
+
+const ListItem = ({ title, avatar_uri }: { title: string; avatar_uri: string }) => (
+    <List.Item >
+      <VStack {...styles["list_item"]} width="100%">
           <HStack>
-            <Avatar source={ item.uri } marginRight={4}></Avatar>
-            <Container>
+            <Avatar size="md" source={{ uri: avatar_uri }} marginRight={4}>        
+              <Avatar.Badge bg={"red.600"} />
+            </Avatar>
               <VStack>
-                <Text fontSize="lg" fontWeight="bold">{item.title}</Text>
-                <Text fontSize="md">{item.title}</Text>
+                <Text fontSize="md" fontWeight="bold">{title}</Text>
+                <Text fontSize="sm">{title}</Text>
               </VStack>
-            </Container>
           </HStack>
-        </Container>
-      )}
+      </VStack>
+  </List.Item>
+)
+
+const getItem = (_data: any, index: number) => ({
+  id: _data[index].id,
+  title: _data[index].title,
+  avatar_uri: _data[index].uri,
+})
+
+const getItemCount = (_data: any) => _data.length;
+
+export const FriendsListComponent = () => {
+  return (
+    <VirtualizedList
+      data={data}
+      initialNumToRender={data.length}
+      renderItem={({ item }) => <ListItem title={item.title} avatar_uri={item.avatar_uri} />}
+      getItemCount={getItemCount}
+      getItem={getItem}
       keyExtractor={(item) => item.id}
     />
   )
 }
 
-export default () => {
-  return (
-    <NativeBaseProvider>
-        <Example />
-    </NativeBaseProvider>
-  )
+const styles = {
+  list_item: {
+    paddingTop: 3,
+    borderTopWidth: "1px",
+    borderTopColor: "gray.200",
+    justifyContent: "center",
+    // borderBottomWidth: "1px",
+    // borderBottomColor: "gray.200",
+  }
 }
+export default FriendsListComponent;
