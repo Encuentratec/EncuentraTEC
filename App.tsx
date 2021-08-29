@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { NativeBaseProvider } from "native-base";
 import React from "react";
 import { ThemeProvider } from "react-native-rapi-ui";
 import Navigation from "./src/navigation";
@@ -12,10 +13,12 @@ export default function App() {
   ];
   return (
     <ThemeProvider images={images}>
-      <AuthProvider>
-        <Navigation />
-      </AuthProvider>
-      <StatusBar />
+      <NativeBaseProvider>
+        <AuthProvider>
+          <Navigation />
+        </AuthProvider>
+        <StatusBar />
+      </NativeBaseProvider>
     </ThemeProvider>
   );
 }
