@@ -1,14 +1,33 @@
-import React from "react";
-import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box } from "native-base";
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
+import React, { useState } from "react";
+import { VStack, Input, Icon } from "native-base";
+import { Ionicons } from '@expo/vector-icons';
 
 
-function SearchBar() {
+function SearchBar(props: { data: any, setData: React.Dispatch<React.SetStateAction<any>> }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const checkName = (name: string, str: string) => {
+    var pattern = str.split("").map((x) => {
+      return `(?=.*${x})`
+    }).join("");
+    var regex = new RegExp(`${pattern}`, "g")
+    return name.match(regex);
+  }
+
   return (
     <VStack paddingTop={4}>
       <Input
         placeholder="Search"
+        value={searchTerm}
+        onChangeText={(value) => {
+          setSearchTerm(value);
+          props.setData(props.data.filter((friend: { title: string; }) => {
+            const friends_name_first_letters = friend.title.substring(0, 3).toLowerCase();
+            const lower_case_val = value.toLowerCase();
+
+            return value == "Search" ? true : (friend.title.toLowerCase().includes(lower_case_val) || checkName(friends_name_first_letters, lower_case_val));
+          }));
+        }}
         variant="filled"
         width="100%"
         bg="gray.200"
