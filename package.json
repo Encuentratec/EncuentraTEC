@@ -33,6 +33,7 @@
     "react-native-calendars": "^1.1266.0",
     "react-native-date-picker": "^3.4.3",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-multiple-select": "^0.5.7",
     "react-native-rapi-ui": "^0.2.1",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
@@ -42,8 +43,8 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.4",
     "redux": "^4.1.1",
-    "rnschedule": "0.0.5",
     "redux-persist": "^6.0.0",
+    "rnschedule": "0.0.5",
     "styled-components": "^5.3.1",
     "styled-system": "^5.1.5"
   },
