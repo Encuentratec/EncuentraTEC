@@ -1,7 +1,7 @@
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { View } from "react-native";
-import { NativeBaseProvider, VStack, Fab, Icon, Modal } from "native-base";
+import { NativeBaseProvider, VStack, Fab, Icon, Modal, Button } from "native-base";
 import NavBar from "../components/utils/NavBar";
 import { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -18,24 +18,46 @@ const data = [
 ];
 
 export default function ({ navigation }) {
-  const [showModal, setShowModal] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [showModal,setShowModal] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
   const [mode, setMode] = useState("date");
-  const onChange = (event, selectedDate) => {
+  const onChange1 = (event, selectedDate) => {
     if (mode == "date") {
-      const currentDate = selectedDate || date;
-      setShowModal(false);
-      setDate(currentDate);
+      const currentDate = selectedDate || date1;
+      setShow1(false);
+      setDate1(currentDate);
       setMode("time");
-      setShowModal(true);
+      setShow1(true);
     } else if (mode == "time") {
-      const currentTime = selectedDate || date;
-      const currentDate = date;
-      date.setHours(currentTime.getHours());
-      date.setMinutes(currentTime.getMinutes());
-      setDate(currentDate);
-      setShowModal(false);
+      const currentTime = selectedDate || date1;
+      const currentDate = date1;
+      date1.setHours(currentTime.getHours());
+      date1.setMinutes(currentTime.getMinutes());
+      setShow1(false);
       setMode("date");
+      setDate1(currentDate);
+      console.log(date1)
+    }
+  };
+  const onChange2 = (event, selectedDate) => {
+    if (mode == "date") {
+      const currentDate = selectedDate || date2;
+      setShow2(false);
+      setDate2(currentDate);
+      setMode("time");
+      setShow2(true);
+    } else if (mode == "time") {
+      const currentTime = selectedDate || date2;
+      const currentDate = date2;
+      date2.setHours(currentTime.getHours());
+      date2.setMinutes(currentTime.getMinutes());
+      setDate2(currentDate);
+      setShow2(false);
+      setMode("date");
+      console.log(date2)
     }
   };
 
@@ -60,15 +82,50 @@ export default function ({ navigation }) {
         icon={<Icon color="white" as={<AntDesign name="plus" />} size="sm" />}
         onPress={() => setShowModal(true)}
       />
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <Modal.Content maxWidth="400px">
+          <Modal.CloseButton />
+          <Modal.Header>Modal Title</Modal.Header>
+          <>
+          Inicio
+          </>
+          <Button onPress={()=>setShow1(true)}>{date1.toString()}</Button>
+          <>
+          Final
+          </>
+          <Button onPress={()=>setShow2(true)}>{date2.toString()}</Button>
+          <Modal.Footer>
+            <Button.Group variant="ghost" space={2}>
+              <Button
+                onPress={() => {
+                  setShowModal(false)
+                }}
+              >
+                Aceptar
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
       <View>
-        {showModal && (
+        {show1 && (
           <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
+            testID="dateTimePicker2"
+            value={date1}
             mode={mode}
             is24Hour={true}
             display="default"
-            onChange={onChange}
+            onChange={onChange1}
+          />
+        )}
+        {show2 && (
+          <DateTimePicker
+            testID="dateTimePicker2"
+            value={date2}
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={onChange2}
           />
         )}
       </View>
