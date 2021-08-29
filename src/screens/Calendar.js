@@ -20,6 +20,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RNSchedule from 'rnschedule';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import MultiSelect from 'react-native-multiple-select';
+import createEvent from "../handlers/events"
+import useUser from "../hooks/useUser";
+
 const data = [
     {
         title: 'Lunch Appointment',
@@ -87,6 +90,11 @@ export default function ({ navigation }) {
             console.log(date2);
         }
     };
+  
+    const {data:user,loading} = useUser({});
+    if(loading){
+      return null;
+    }
 
     return (
         <>

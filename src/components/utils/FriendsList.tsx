@@ -1,28 +1,23 @@
 import React from "react"
-import { VStack, Text, HStack, Avatar, List, View, AddIcon, IconButton } from "native-base"
+import { VStack, Text, HStack, Avatar, List, View, AddIcon, IconButton, Icon } from "native-base"
 import { VirtualizedList } from "react-native"
+import { UserPreview } from "../../screens/Home"
 
 
 export const FriendsListComponent = (props: {
-  data: {
-    id: string;
-    title: string;
-    uri: string;
-    status: string;
-    is_friend: boolean;
-  }[]
+  data: UserPreview[], userId: string
 }) => {
-  const ListItem = ({ title, avatar_uri, status, is_friend }: { title: string; avatar_uri: string; status: string; is_friend: boolean }) => (
+  const ListItem = ({ given_name, family_name, avatar_uri, status, is_friend, location }: { given_name: string; family_name: string; avatar_uri: string; status: string; is_friend: boolean, location: string }) => (
     <List.Item borderBottomColor="#e7e5e4" borderBottomWidth="1px" >
       <VStack justifyContent="center" width="100%" >
         <HStack justifyContent="space-between" alignItems="center">
           <HStack>
             <Avatar size="md" source={{ uri: avatar_uri }} marginRight={4}>
-              <Avatar.Badge bg={status == "disponible" ? "green.600" : "red.600"} />
+              <Avatar.Badge bg={status == "available" ? "green.600" : "red.600"} />
             </Avatar>
             <VStack>
-              <Text fontSize="md" fontWeight="bold">{title}</Text>
-              <Text fontSize="sm">{title}</Text>
+              <Text fontSize="md" fontWeight="bold">{given_name + " " + family_name}</Text>
+              <Text fontSize="sm">en {location}</Text>
             </VStack>
           </HStack>
           {!is_friend &&
@@ -34,16 +29,23 @@ export const FriendsListComponent = (props: {
   )
 
   const getItem = (_data: any, index: number) => {
+    const user_a_data = _data[index].user_a;
     return ({
-      id: _data[index].id,
-      title: _data[index].title,
-      avatar_uri: _data[index].uri,
-      status: _data[index].status,
-      is_friend: _data[index].is_friend,
+      id: user_a_data.id,
+      given_name: user_a_data.given_name,
+      avatar_uri: user_a_data.picture_url ?? "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg",
+      status: user_a_data.status,
+      is_friend: _data[index].user_b.id == props.userId,
+      location: user_a_data.custom_location ?? "Casa",
+      family_name: user_a_data.family_name ?? "",
     })
   }
 
   const getItemCount = (_data: any) => _data.length;
+
+  const filteredData = props.data.filter((friend: any) => {
+    return friend["user_a"].id != props.userId
+  });
 
   return (
     <>
@@ -56,9 +58,9 @@ export const FriendsListComponent = (props: {
         }}
       ></View>
       <VirtualizedList
-        data={props.data}
-        initialNumToRender={props.data.length}
-        renderItem={({ item }) => <ListItem title={item.title} avatar_uri={item.avatar_uri} status={item.status} is_friend={item.is_friend} />}
+        data={filteredData}
+        initialNumToRender={filteredData.length}
+        renderItem={({ item }) => <ListItem given_name={item.given_name} family_name={item.family_name} avatar_uri={item.avatar_uri} status={item.status} is_friend={item.is_friend} location={item.location} />}
         getItemCount={getItemCount}
         getItem={getItem}
         keyExtractor={(item) => item.id}
