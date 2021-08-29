@@ -1,15 +1,19 @@
 import { Button, HStack, Switch, VStack, Text, Actionsheet, useDisclose } from "native-base"
 import React, { useState } from "react"
-import { useDispatch } from "react-redux";
 import useUser from "../../hooks/useUser";
 import { supabase } from "../../initSupabase";
 import { User } from '../../types/supabaseMapped';
 
 const Configuration = () => {
-    const { data } = useUser();
+    const { data, updateRedux } = useUser({});
     const { isOpen, onOpen, onClose } = useDisclose()
     const [location, setLocation] = useState("TEC");
     const [currentStatus, setStatus] = useState(data?.status ?? "available");
+    console.log("CURRENT: ", currentStatus);
+    console.log("redux: ", data?.status);
+    if(data?.status == undefined) {
+        console.log(data);
+    }
 
     const updateLocation = (loc: string) => {
         setLocation(loc);
@@ -23,12 +27,16 @@ const Configuration = () => {
             setStatus("available");
         }
 
-        const { error } = await supabase.from<User>('user').update({
+        const { data: newUserData, error } = await supabase.from<User>('user').update({
             id: data?.id,
             status: currentStatus == "available" ? "busy" : "available",
         });
         if (error) {
             alert('Algo salió mal al actualizar tu estatus, vuelve a intentar más tarde.');
+        }
+
+        if (newUserData){
+            updateRedux(newUserData[0]);
         }
     }
 

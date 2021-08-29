@@ -27,16 +27,20 @@ const useUser = ({ uid }: { uid?: string }) => {
         if (!uid) {
             setData(userData as User);
         } else {
-            supabase
-                .from<User>('user')
-                .select('*')
-                .eq('auth_uid', uid)
-                .single()
-                .then((ret) => {
-                    if (ret.error) setError(ret.error);
-                    else setData(ret.data);
-                    setLoading(false);
-                });
+            try {
+                supabase
+                    .from<User>('user')
+                    .select('*')
+                    .eq('auth_uid', uid)
+                    .single()
+                    .then((ret) => {
+                        if (ret.error) setError(ret.error);
+                        else setData(ret.data);
+                        setLoading(false);
+                    });
+            } catch(error) {
+                console.log(error);
+            }
         }
     }, []);
 
@@ -44,6 +48,7 @@ const useUser = ({ uid }: { uid?: string }) => {
         data,
         loading,
         error,
+        updateRedux,
     };
 };
 
