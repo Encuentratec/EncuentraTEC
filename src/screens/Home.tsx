@@ -2,12 +2,8 @@ import React from "react";
 import { MainStackParamList } from "../types/navigation";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
-    NativeBaseProvider,
     Heading,
-    Container,
     Avatar,
-    ScrollView,
-    Text,
     HStack,
     VStack,
 } from "native-base"
@@ -16,6 +12,7 @@ import FriendsList from "../components/utils/FriendsList";
 
 import { useTheme } from "react-native-rapi-ui";
 import NavBar from "../components/utils/NavBar";
+
 
 export default function ({ navigation }: StackScreenProps<MainStackParamList, "MainTabs">) {
     const { isDarkmode, setTheme } = useTheme();
