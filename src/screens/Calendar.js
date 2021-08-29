@@ -6,6 +6,8 @@ import NavBar from "../components/utils/NavBar";
 import { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import RNSchedule from "rnschedule";
+import createEvent from "../handlers/events"
+import useUser from "../hooks/useUser";
 
 const data = [
   {
@@ -61,6 +63,11 @@ export default function ({ navigation }) {
     }
   };
 
+  const {data:user,loading} = useUser({});
+  if(loading){
+    return null;
+  }
+
   return (
     <NativeBaseProvider>
       <VStack paddingX={4} paddingTop={12} flex={1} justifyContent="flex-start">
@@ -89,16 +96,35 @@ export default function ({ navigation }) {
           <>
           Inicio
           </>
-          <Button onPress={()=>setShow1(true)}>{date1.toString()}</Button>
+          <Button onPress={()=>setShow1(true)}>{date1.toLocaleString("es-MX")}</Button>
           <>
           Final
           </>
-          <Button onPress={()=>setShow2(true)}>{date2.toString()}</Button>
+          <Button onPress={()=>setShow2(true)}>{date2.toLocaleString("es-MX")}</Button>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
               <Button
                 onPress={() => {
-                  setShowModal(false)
+                  setShowModal(false);
+                  console.log(user)
+                  /*createEvent({
+                    name: "Name",
+                    description: "description",
+                    start_date: date1.toLocaleString("en-US"),
+                    end_date: date2.toLocaleString("en-US"),
+                    color: "blue",
+                    user_id: user}
+                  )*/
+                  data.push(
+                    {
+                      title: "Name",
+                      subtitle: "Description",
+                      start: date1,
+                      end: date2,
+                      color: "blue",
+                    }
+
+                  )
                 }}
               >
                 Aceptar
