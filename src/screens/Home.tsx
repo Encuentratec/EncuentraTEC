@@ -1,89 +1,78 @@
 import React from "react";
-import { View, Linking } from "react-native";
 import { MainStackParamList } from "../types/navigation";
 import { StackScreenProps } from "@react-navigation/stack";
-import { supabase } from "../initSupabase";
 import {
-  Layout,
-  Button,
-  Text,
-  TopNav,
-  Section,
-  SectionContent,
-  useTheme,
-  themeColor,
-} from "react-native-rapi-ui";
-import { Ionicons } from "@expo/vector-icons";
+    NativeBaseProvider,
+    Heading,
+    Container,
+    Avatar,
+    ScrollView,
+    Text,
+    HStack,
+    VStack,
+} from "native-base"
+import SearchBar from "../components/utils/SearchBar";
+import FriendsList from "../components/utils/FriendsList";
 
-export default function ({
-  navigation,
-}: StackScreenProps<MainStackParamList, "MainTabs">) {
-  const { isDarkmode, setTheme } = useTheme();
-  return (
-    <Layout>
-      <TopNav
-        middleContent="Home"
-        rightContent={
-          <Ionicons
-            name={isDarkmode ? "sunny" : "moon"}
-            size={20}
-            color={isDarkmode ? themeColor.white100 : themeColor.dark}
-          />
-        }
-        rightAction={() => {
-          if (isDarkmode) {
-            setTheme("light");
-          } else {
-            setTheme("dark");
-          }
-        }}
-      />
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Section style={{ marginTop: 20 }}>
-          <SectionContent>
-            <Text fontWeight="bold" style={{ textAlign: "center" }}>
-              These UI components provided by Rapi UI
-            </Text>
-            <Button
-              style={{ marginTop: 10 }}
-              text="Rapi UI Documentation"
-              status="info"
-              onPress={() => Linking.openURL("https://rapi-ui.kikiding.space/")}
-            />
-            <Button
-              text="Go to second screen"
-              onPress={() => {
-                navigation.navigate("SecondScreen");
-              }}
-              style={{
-                marginTop: 10,
-              }}
-            />
-            <Button
-              status="danger"
-              text="Logout"
-              onPress={async () => {
-                const { error } = await supabase.auth.signOut();
-                if (!error) {
-                  alert("Signed out!");
-                }
-                if (error) {
-                  alert(error.message);
-                }
-              }}
-              style={{
-                marginTop: 10,
-              }}
-            />
-          </SectionContent>
-        </Section>
-      </View>
-    </Layout>
-  );
+import { useTheme } from "react-native-rapi-ui";
+import NavBar from "../components/utils/NavBar";
+
+export default function ({ navigation }: StackScreenProps<MainStackParamList, "MainTabs">) {
+    const { isDarkmode, setTheme } = useTheme();
+
+    return (
+        <VStack paddingX={4} paddingTop={12} flex={1} justifyContent="flex-start" >
+            <NavBar title="Tus Amigos" avatar_uri="https://pbs.twimg.com/profile_images/1188747996843761700/8CiUdKZW_400x400.jpg" />
+            <SearchBar />
+            <VStack paddingTop={2}>
+                <Heading
+                    alignSelf={{
+                        base: "flex-start",
+                        md: "flex-start",
+                    }}
+                    marginBottom={2}
+                    size={"lg"}
+                >
+                    Favoritos
+                </Heading>
+                <HStack space={2}>
+                    <Avatar
+                        source={{
+                            uri: "https://pbs.twimg.com/profile_images/1188747996843761665/8CiUdKZW_400x400.jpg",
+                        }}
+                    >
+                        SS
+                        <Avatar.Badge bg={"green.600"} />
+                    </Avatar>
+                    <Avatar
+                        source={{
+                            uri: "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg",
+                        }}
+                    >
+                        GG
+                        <Avatar.Badge bg={"green.600"} />
+                    </Avatar>
+                    <Avatar
+                        source={{
+                            uri: "https://pbs.twimg.com/profile_images/1352844693151731713/HKO7cnlW_400x400.jpg",
+                        }}
+                    >
+                        RS
+                        <Avatar.Badge bg={"green.600"} />
+                    </Avatar>
+                    <Avatar
+                        source={{
+                            uri: "https://pbs.twimg.com/profile_images/1309797238651060226/18cm6VhQ_400x400.jpg",
+                        }}
+                    >
+                        AK
+                        <Avatar.Badge bg={"green.600"} />
+                    </Avatar>
+                </HStack>
+            </VStack>
+            <VStack marginTop={4}>
+                <FriendsList />
+            </VStack>
+        </VStack>
+    );
 }

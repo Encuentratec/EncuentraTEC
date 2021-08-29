@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { NativeBaseProvider } from "native-base";
 import React from 'react';
 import { ThemeProvider } from 'react-native-rapi-ui';
 import { Provider } from 'react-redux';
@@ -15,12 +16,14 @@ export default function App() {
 
     return (
         <Provider store={store}>
-            <ThemeProvider images={images}>
+          <ThemeProvider images={images}>
+              <NativeBaseProvider>
                 <AuthProvider>
-                    <Navigation />
+                  <Navigation />
                 </AuthProvider>
-                <StatusBar />
-            </ThemeProvider>
+              <StatusBar />
+            </NativeBaseProvider>
+          </ThemeProvider>
         </Provider>
     );
 }

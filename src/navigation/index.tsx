@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Main from './MainStack';
 import Auth from './AuthStack';
 import Loading from '../screens/utils/Loading';
+import { Container } from 'native-base';
 
 export default () => {
     const { session, user } = useContext(AuthContext);
