@@ -12,6 +12,7 @@ import FriendsList from "../components/utils/FriendsList";
 
 import { useTheme } from "react-native-rapi-ui";
 import NavBar from "../components/utils/NavBar";
+import useUser from '../hooks/useUser';
 
 
 export default function ({ navigation }: StackScreenProps<MainStackParamList, "MainTabs">) {

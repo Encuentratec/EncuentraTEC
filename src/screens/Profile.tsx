@@ -1,8 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
 import { MainStackParamList } from '../types/navigation';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Layout, Text } from 'react-native-rapi-ui';
 import { Avatar, Center, Divider, Heading, VStack } from 'native-base';
 import useUser from '../hooks/useUser';
 
